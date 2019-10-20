@@ -11,11 +11,10 @@ namespace BabysitterKata
 
         public string CalculateDifferenceBetweenTwoHours(string Start, string End)
         {
-            if (Start == "5PM" && End == "10PM")
-                return "5";
-            else if (Start == "7PM" && End == "12AM")
-                return "5";
-            return "";
+            int startTime = Int32.Parse(Start.Replace("AM","").Replace("PM",""));
+            int endTime = Int32.Parse(End.Replace("AM","").Replace("PM",""));
+
+            return (endTime - startTime).ToString();
         }
     }
 }
