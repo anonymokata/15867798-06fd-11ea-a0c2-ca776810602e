@@ -28,6 +28,8 @@ namespace BabysitterKata
                 return (totalHours * 15).ToString();
             else if (Family == "B")
                 return (totalHours * 12).ToString();
+            else if (Family == "C")
+                return (totalHours * 21).ToString();
             else
                 return "";
         }
