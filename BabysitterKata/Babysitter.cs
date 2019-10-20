@@ -14,6 +14,9 @@ namespace BabysitterKata
             int startTime = Int32.Parse(Start.Replace("AM","").Replace("PM",""));
             int endTime = Int32.Parse(End.Replace("AM","").Replace("PM",""));
 
+            if (End.Contains("AM") && endTime < 12)
+                endTime += 12;
+
             return (endTime - startTime).ToString();
         }
     }
