@@ -6,25 +6,29 @@ namespace BabysitterTests
 {
     public class BabysitterTests
     {
+        Babysitter babysitter = new Babysitter();
         [Fact]
         public void WhenPassingInFiveAndTenReturnFive()
         {
-            Babysitter babysitter = new Babysitter();
             Assert.Equal("5",babysitter.CalculateDifferenceBetweenTwoHours("5PM","10PM"));
         }
 
         [Fact]
         public void WhenPassingInSevenAndTwelveReturnFive()
         {
-            Babysitter babysitter = new Babysitter();
             Assert.Equal("5", babysitter.CalculateDifferenceBetweenTwoHours("7PM","12AM"));
         }
 
         [Fact]
         public void WhenPassingInSevenAndThreeReturnEight()
         {
-            Babysitter babysitter = new Babysitter();
             Assert.Equal("8", babysitter.CalculateDifferenceBetweenTwoHours("7PM", "3AM"));
+        }
+
+        [Fact]
+        public void CalculatePayWhenPassingInTwoNumbersAndAFamily()
+        {
+            Assert.Equal("45", babysitter.CalculatePay("8PM","11PM","A"));
         }
     }
 }

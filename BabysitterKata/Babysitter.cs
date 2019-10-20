@@ -19,5 +19,12 @@ namespace BabysitterKata
 
             return (endTime - startTime).ToString();
         }
+
+        public string CalculatePay(string Start, string End, string Family)
+        {
+            int totalHours = 0;
+            totalHours = Int32.Parse(CalculateDifferenceBetweenTwoHours(Start, End));
+            return (totalHours * 15).ToString();
+        }
     }
 }
