@@ -6,7 +6,7 @@ namespace BabysitterKata
     {
         static void Main(string[] args)
         {
-            
+
         }
 
         public string CalculateDifferenceBetweenTwoHours(string Start, string End)
@@ -30,8 +30,13 @@ namespace BabysitterKata
             totalHours = Int32.Parse(CalculateDifferenceBetweenTwoHours(Start, End));
             if (Family == "A")
             {
-                hoursForFirstRate = 11 - startTime;
-                hoursForSecondRate = endTime - 11;
+                if (endTime > 11)
+                {
+                    hoursForFirstRate = 11 - startTime;
+                    hoursForSecondRate = endTime - 11;
+                }
+                else
+                    hoursForFirstRate = totalHours;
                 return ((hoursForFirstRate * 15) + (hoursForSecondRate * 20)).ToString();
             }
             else if (Family == "B")
