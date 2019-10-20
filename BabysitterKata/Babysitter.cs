@@ -27,6 +27,7 @@ namespace BabysitterKata
             int endTime = Int32.Parse(End.Replace("AM","").Replace("PM",""));
             int hoursForFirstRate = 0;
             int hoursForSecondRate = 0;
+            int hoursForThirdRate = 0;
             totalHours = Int32.Parse(CalculateDifferenceBetweenTwoHours(Start, End));
             if (Family == "A")
             {
@@ -40,7 +41,16 @@ namespace BabysitterKata
                 return ((hoursForFirstRate * 15) + (hoursForSecondRate * 20)).ToString();
             }
             else if (Family == "B")
-                return (totalHours * 12).ToString();
+            {
+                if (endTime > 10)
+                {
+                    hoursForFirstRate = 10 - startTime;
+                    hoursForSecondRate = endTime - 10;
+                }
+                else
+                    hoursForFirstRate = totalHours;
+                return ((hoursForFirstRate * 12) + (hoursForSecondRate * 8)).ToString();
+            }
             else if (Family == "C")
                 return (totalHours * 21).ToString();
             else
