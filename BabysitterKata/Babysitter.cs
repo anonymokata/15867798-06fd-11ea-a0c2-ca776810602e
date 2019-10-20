@@ -58,7 +58,16 @@ namespace BabysitterKata
                 return ((hoursForFirstRate * 12) + (hoursForSecondRate * 8) + (hoursForThirdRate * 16)).ToString();
             }
             else if (Family == "C")
-                return (totalHours * 21).ToString();
+            {
+                if (endTime > 9)
+                {
+                    hoursForFirstRate = 9 - startTime;
+                    hoursForSecondRate = endTime - 9;
+                }
+                else
+                    hoursForFirstRate = totalHours;
+                return ((hoursForFirstRate * 21) + (hoursForSecondRate * 15)).ToString();
+            }
             else
                 return "";
         }
