@@ -12,5 +12,12 @@ namespace BabysitterTests
             Babysitter babysitter = new Babysitter();
             Assert.Equal("5",babysitter.CalculateDifferenceBetweenTwoHours("5PM","10PM"));
         }
+
+        [Fact]
+        public void WhenPassingInSevenAndTwelveReturnFive()
+        {
+            Babysitter babysitter = new Babysitter();
+            Assert.Equal("5", babysitter.CalculateDifferenceBetweenTwoHours("7PM","12AM"));
+        }
     }
 }
