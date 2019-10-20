@@ -42,5 +42,11 @@ namespace BabysitterTests
         {
             Assert.Equal("84", babysitter.CalculatePay("5PM","9PM","C"));
         }
+
+        [Fact]
+        public void CalulatePayWhenWorkingFiveToTwelveForFamilyA()
+        {
+            Assert.Equal("110", babysitter.CalculatePay("5PM","12AM","A"));
+        }
     }
 }
