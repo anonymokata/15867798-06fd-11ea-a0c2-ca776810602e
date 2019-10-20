@@ -24,7 +24,12 @@ namespace BabysitterKata
         {
             int totalHours = 0;
             totalHours = Int32.Parse(CalculateDifferenceBetweenTwoHours(Start, End));
-            return (totalHours * 15).ToString();
+            if (Family == "A")
+                return (totalHours * 15).ToString();
+            else if (Family == "B")
+                return (totalHours * 12).ToString();
+            else
+                return "";
         }
     }
 }
