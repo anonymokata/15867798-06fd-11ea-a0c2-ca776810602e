@@ -28,6 +28,11 @@ namespace BabysitterKata
             int hoursForFirstRate = 0;
             int hoursForSecondRate = 0;
             int hoursForThirdRate = 0;
+
+            if (startTime < 5)
+            {
+                return "Error: Can't start working before 5PM";
+            }
             totalHours = Int32.Parse(CalculateDifferenceBetweenTwoHours(Start, End));
             if (Family == "A")
             {

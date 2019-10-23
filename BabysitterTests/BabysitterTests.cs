@@ -75,5 +75,11 @@ namespace BabysitterTests
             babysitter = new Babysitter();
             Assert.Equal("60", babysitter.CalculatePay("9PM","1AM","C"));
         }
+
+        [Fact]
+        public void ReturnErrorWhenStartingBeforeFive()
+        {
+            Assert.Equal("Error: Can't start working before 5PM", babysitter.CalculatePay("3PM","7PM","A"));
+        }
     }
 }
