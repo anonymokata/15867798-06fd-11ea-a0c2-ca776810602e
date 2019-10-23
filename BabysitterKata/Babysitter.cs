@@ -33,6 +33,10 @@ namespace BabysitterKata
             {
                 return "Error: Can't start working before 5PM";
             }
+            else if (endTime > 16)
+            {
+                return "Error: Can't leave after 4AM";
+            }
             totalHours = Int32.Parse(CalculateDifferenceBetweenTwoHours(Start, End));
             if (Family == "A")
             {

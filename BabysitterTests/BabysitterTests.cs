@@ -58,21 +58,18 @@ namespace BabysitterTests
         [Fact]
         public void CalulatePayWhenWorkingSevenToTwelveForFamilyB()
         {
-            babysitter = new Babysitter();
             Assert.Equal("52", babysitter.CalculatePay("7PM","12AM","B"));
         }
         
         [Fact]
         public void CalulatePayWhenWorkingNineToThreeForFamilyB()
         {
-            babysitter = new Babysitter();
             Assert.Equal("76", babysitter.CalculatePay("9PM","3AM","B"));
         }
 
         [Fact]
         public void CalulatePayWhenWorkingNineToOneForFamilyC()
         {
-            babysitter = new Babysitter();
             Assert.Equal("60", babysitter.CalculatePay("9PM","1AM","C"));
         }
 
@@ -80,6 +77,12 @@ namespace BabysitterTests
         public void ReturnErrorWhenStartingBeforeFive()
         {
             Assert.Equal("Error: Can't start working before 5PM", babysitter.CalculatePay("3PM","7PM","A"));
+        }
+
+        [Fact]
+        public void ReturnErrorWhenEndingAfterFour()
+        {
+            Assert.Equal("Error: Can't leave after 4AM", babysitter.CalculatePay("8PM","5AM","A"));
         }
     }
 }
