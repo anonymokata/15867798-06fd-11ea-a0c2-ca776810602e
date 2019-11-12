@@ -61,7 +61,7 @@ namespace BabysitterKata
             {
                 startTime = GetStartTime(Start);
             }
-            catch(System.FormatException ex)
+            catch(System.FormatException)
             {
                 return "\nError: Starting time entered was an invalid format.\n" +
                 "Please enter a time such as 6PM.\n";
@@ -71,20 +71,20 @@ namespace BabysitterKata
             {
                 endTime = GetEndTime(End);
             }
-            catch(System.FormatException ex)
+            catch(System.FormatException)
             {
                 return "\nError: Ending time entered was an invalid format.\n" +
                 "Please enter a time such as 6PM.\n";
             }
 
-            if (startTime > endTime)
+            if (startTime > endTime && startTime != 12)
                 return "\nError: Starting time can't be later than the ending time.\n";
             
             int hoursForFirstRate = 0;
             int hoursForSecondRate = 0;
             int hoursForThirdRate = 0;
 
-            if (startTime < 5)
+            if (startTime < 5 || startTime >= 12)
             {
                 return "Error: Can't start working before 5PM";
             }
@@ -135,7 +135,7 @@ namespace BabysitterKata
                 return ((hoursForFirstRate * 21) + (hoursForSecondRate * 15)).ToString();
             }
             else
-                return "Error: Invalid family entered.";
+                return "\nError: Invalid family entered.\n";
         }
 
         public int GetStartTime(string Start)
@@ -169,7 +169,13 @@ namespace BabysitterKata
             Console.Write("Please enter a family (A-C). ");
             family = Console.ReadLine();
 
-            Console.WriteLine(CalculatePay(startTime, endTime, family));
+            string nightlyPay = CalculatePay(startTime, endTime, family);
+
+            if (nightlyPay.Contains("Error"))
+                Console.WriteLine(nightlyPay);
+            else
+                Console.WriteLine("\nYour nightly wage working from " + startTime + " to " + endTime +
+                " for family " + family + " would be $" + nightlyPay + "\n");
         }
 
         public void ViewFamilies()
