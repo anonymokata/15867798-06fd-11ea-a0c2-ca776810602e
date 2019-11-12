@@ -42,10 +42,10 @@ namespace BabysitterKata
 
         public string CalculateDifferenceBetweenTwoHours(string Start, string End)
         {
-            int startTime = Int32.Parse(Start.Replace("AM","").Replace("PM",""));
-            int endTime = Int32.Parse(End.Replace("AM","").Replace("PM",""));
+            int startTime = Int32.Parse(Start.ToUpper().Replace("AM","").Replace("PM",""));
+            int endTime = Int32.Parse(End.ToUpper().Replace("AM","").Replace("PM",""));
 
-            if (End.Contains("AM") && endTime < 12)
+            if (End.ToUpper().Contains("AM") && endTime < 12)
                 endTime += 12;
 
             return (endTime - startTime).ToString();
@@ -54,8 +54,22 @@ namespace BabysitterKata
         public string CalculatePay(string Start, string End, string Family)
         {
             int totalHours = 0;
-            int startTime = GetStartTime(Start);
-            int endTime = GetEndTime(End);
+            int startTime = 0;
+            int endTime = 0;
+            try
+            {
+                startTime = GetStartTime(Start);
+                endTime = GetEndTime(End);
+            }
+            catch(System.FormatException ex)
+            {
+                return "\nError: Time entered was an ivalid format.\n" +
+                "Please enter a time such as 6PM.\n";
+            }
+
+            if (startTime > endTime)
+                return "\nError: Starting time can't be later than the ending time.\n";
+            
             int hoursForFirstRate = 0;
             int hoursForSecondRate = 0;
             int hoursForThirdRate = 0;
@@ -68,8 +82,10 @@ namespace BabysitterKata
             {
                 return "Error: Can't leave after 4AM";
             }
+
             totalHours = Int32.Parse(CalculateDifferenceBetweenTwoHours(Start, End));
-            if (Family == "A")
+
+            if (Family.ToUpper() == "A")
             {
                 if (endTime > 11)
                 {
@@ -80,7 +96,7 @@ namespace BabysitterKata
                     hoursForFirstRate = totalHours;
                 return ((hoursForFirstRate * 15) + (hoursForSecondRate * 20)).ToString();
             }
-            else if (Family == "B")
+            else if (Family.ToUpper() == "B")
             {
                 if (endTime > 12)
                 {
@@ -97,7 +113,7 @@ namespace BabysitterKata
                     hoursForFirstRate = totalHours;
                 return ((hoursForFirstRate * 12) + (hoursForSecondRate * 8) + (hoursForThirdRate * 16)).ToString();
             }
-            else if (Family == "C")
+            else if (Family.ToUpper() == "C")
             {
                 if (endTime > 9)
                 {
@@ -109,32 +125,32 @@ namespace BabysitterKata
                 return ((hoursForFirstRate * 21) + (hoursForSecondRate * 15)).ToString();
             }
             else
-                return "";
+                return "Error: Invalid family entered.";
         }
 
         public int GetStartTime(string Start)
         {
-            int startTime = Int32.Parse(Start.Replace("AM","").Replace("PM",""));
-            if (Start.Contains("AM") && startTime < 12)
+            int startTime = Int32.Parse(Start.ToUpper().Replace("AM","").Replace("PM",""));
+            if (Start.ToUpper().Contains("AM") && startTime < 12)
                 startTime += 12;
             return startTime;
         }
 
         public int GetEndTime(string End)
         {
-            int endTime = Int32.Parse(End.Replace("AM","").Replace("PM",""));
-            if (End.Contains("AM") && endTime < 12)
+            int endTime = Int32.Parse(End.ToUpper().Replace("AM","").Replace("PM",""));
+            if (End.ToUpper().Contains("AM") && endTime < 12)
                 endTime += 12;
             return endTime;
         }
-        
+
         public void RunCalculatePay()
         {
             string startTime = "";
             string endTime = "";
             string family = "";
 
-            Console.Write("\nPlease enter the starting time. e.g. 4PM. ");
+            Console.Write("\nPlease enter the starting time. e.g. 5PM. ");
             startTime = Console.ReadLine();
 
             Console.Write("Please enter the ending time. e.g. 9PM. ");
@@ -142,6 +158,7 @@ namespace BabysitterKata
 
             Console.Write("Please enter a family (A-C). ");
             family = Console.ReadLine();
+
             Console.WriteLine(CalculatePay(startTime, endTime, family));
         }
 
