@@ -56,14 +56,24 @@ namespace BabysitterKata
             int totalHours = 0;
             int startTime = 0;
             int endTime = 0;
+
             try
             {
                 startTime = GetStartTime(Start);
+            }
+            catch(System.FormatException ex)
+            {
+                return "\nError: Starting time entered was an invalid format.\n" +
+                "Please enter a time such as 6PM.\n";
+            }
+
+            try
+            {
                 endTime = GetEndTime(End);
             }
             catch(System.FormatException ex)
             {
-                return "\nError: Time entered was an ivalid format.\n" +
+                return "\nError: Ending time entered was an invalid format.\n" +
                 "Please enter a time such as 6PM.\n";
             }
 
