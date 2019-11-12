@@ -6,7 +6,38 @@ namespace BabysitterKata
     {
         static void Main(string[] args)
         {
-            
+            Babysitter babysitter = new Babysitter();
+            bool endApp = false;
+            string message = 
+            "------------------\n" +
+            "Hourly Pay Calculator\n" +
+            "------------------\n";
+
+            Console.WriteLine(message);
+
+            while (!endApp)
+            {
+
+                message =
+                "1. Calculate Pay\n" +
+                "2. View Family Payrates\n" +
+                "3. Exit Application";
+
+                Console.WriteLine(message);
+
+                switch(Console.ReadLine())
+                {
+                    case "1":
+                        babysitter.RunCalculatePay();
+                        break;
+                    case "2":
+                        babysitter.ViewFamilies();
+                        break;
+                    case "3":
+                        endApp = true;
+                        break;
+                }
+            }
         }
 
         public string CalculateDifferenceBetweenTwoHours(string Start, string End)
@@ -95,6 +126,33 @@ namespace BabysitterKata
             if (End.Contains("AM") && endTime < 12)
                 endTime += 12;
             return endTime;
+        }
+        
+        public void RunCalculatePay()
+        {
+            string startTime = "";
+            string endTime = "";
+            string family = "";
+
+            Console.Write("\nPlease enter the starting time. e.g. 4PM. ");
+            startTime = Console.ReadLine();
+
+            Console.Write("Please enter the ending time. e.g. 9PM. ");
+            endTime = Console.ReadLine();
+
+            Console.Write("Please enter a family (A-C). ");
+            family = Console.ReadLine();
+            Console.WriteLine(CalculatePay(startTime, endTime, family));
+        }
+
+        public void ViewFamilies()
+        {
+            string message = 
+            "\nFamily A: $15 per hour before 11PM, $20 per hour after 11PM.\n" +
+            "Family B: $12 per hour before 10PM, $8 per hour between 10PM and 12AM, $16 per hour after 12AM.\n" +
+            "Family C: $21 per hour before 9PM, $15 per hour after 9PM.\n";
+
+            Console.WriteLine(message);
         }
     }
 }
